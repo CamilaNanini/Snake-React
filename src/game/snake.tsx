@@ -27,7 +27,7 @@ const SnakeGame = () => {
   const [snake, setSnake] = useState(INITIAL_SNAKE);
   const [direction, setDirection] = useState('');
   const [food, setFood] = useState(INITIAL_FOOD);
-  const [score, setScore] = useState(99); //Modificar a 0 para el final
+  const [score, setScore] = useState(0);
   const [gameOver, setGameOver] = useState(false);
   const [youWin, setYouWin] = useState(false);
 
