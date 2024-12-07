@@ -1,4 +1,7 @@
 import { useState, useEffect } from 'react';
+import { Button } from '../components/ui/button';
+import happySnake from '../assets/happy.jpg';
+import sadSnake from '../assets/sad.png';
 
 const generateFood = (snake: { x: number; y: number }[], boardSize: number, foodX: number, foodY: number) => {
   let newFood: { x: number; y: number };
@@ -119,16 +122,18 @@ useEffect(() => {
 
   return (
     <div>
-      <p>Score: {score}</p>
+      <p className='m-3 text-xl font-black'>Score: {score}</p>
       {gameOver ? (
         <div>
-          <h2>Game Over</h2>
-          <button onClick={restartGame}>Restart</button>
+          <h2 className='m-3 text-xl font-black text-red-800'>Game Over</h2>
+          <img src={sadSnake} alt="Icono" className="w-[300px] h-[300px]" />
+          <Button variant='default' className='mt-5 font-extrabold' onClick={restartGame}>Restart</Button>
         </div>
       ) : youWin ? (
         <div>
-          <h2>YOU WIN</h2>
-          <button onClick={restartGame}>Restart</button>
+          <h2 className='m-3 text-xl font-black text-green-700 animate-pulse'>YOU WIN!!</h2>
+          <img src={happySnake} alt="Icono" className="w-[300px] h-[300px]" />
+          <Button variant='default' className='mt-5 font-extrabold' onClick={restartGame}>Restart</Button>
         </div>
       ):(
         <div
