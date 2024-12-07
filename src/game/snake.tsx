@@ -131,7 +131,7 @@ useEffect(() => {
         </div>
       ) : youWin ? (
         <div>
-          <h2 className='m-3 text-xl font-black text-green-700 animate-pulse'>YOU WIN!!</h2>
+          <h2 className='m-3 text-xl font-black text-green-700'>YOU WIN!!</h2>
           <img src={happySnake} alt="Icono" className="w-[300px] h-[300px]" />
           <Button variant='default' className='mt-5 font-extrabold' onClick={restartGame}>Restart</Button>
         </div>
