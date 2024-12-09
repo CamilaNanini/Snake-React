@@ -35,6 +35,7 @@ const SnakeGame: React.FC = () =>  {
 
   const INITIAL_SNAKE = [{ x: Math.floor(BOARD_SIZE / 2), y: Math.floor(BOARD_SIZE / 2) }];
   const INITIAL_FOOD = generateFood(INITIAL_SNAKE, BOARD_SIZE, Math.floor(BOARD_SIZE / 2), Math.floor(BOARD_SIZE / 2));
+  const FINAL_SCORE = BOARD_SIZE * BOARD_SIZE
   
   const [snake, setSnake] = useState(INITIAL_SNAKE);
   const [direction, setDirection] = useState('');
@@ -67,7 +68,7 @@ const SnakeGame: React.FC = () =>  {
 
   //Aquí actualizo la comida, el puntaje y la serpiente
 useEffect(() => {
-  if (score === 100) {
+  if (score === FINAL_SCORE) {
     setYouWin(true);
     return;
   }
@@ -95,11 +96,11 @@ useEffect(() => {
       newSnake.unshift(head);
 
       if (head.x === food.x && head.y === food.y) {
-        // Solo incrementa el puntaje si es menor que 100
-        if (score < 100) {
+        // Solo incrementa el puntaje si es menor que FINAL_SCORE
+        if (score < FINAL_SCORE) {
           setScore(prevScore => {
             const newScore = prevScore + 1;
-            return newScore < 100 ? newScore : 100;
+            return newScore < FINAL_SCORE ? newScore : FINAL_SCORE;
           });
         }
         setFood(generateFood(newSnake, BOARD_SIZE, food.x, food.y));
@@ -122,11 +123,10 @@ useEffect(() => {
   return () => clearInterval(intervalId);
 }, [direction, food, score]);
 
-
   const restartGame = () => {
     setSnake(INITIAL_SNAKE);
     setDirection('');
-    setFood(generateFood(INITIAL_SNAKE, BOARD_SIZE, 0, 0));
+    setFood(generateFood(INITIAL_SNAKE, BOARD_SIZE, Math.floor(BOARD_SIZE / 2), Math.floor(BOARD_SIZE / 2)));
     setScore(0);
     setGameOver(false);
     setYouWin(false);
