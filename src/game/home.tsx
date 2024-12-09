@@ -13,9 +13,9 @@ const Home: React.FC = () => {
         <div>
             <h1 className='font-mono m-2'>Select a difficulty</h1>
             <div className='flex flex-col gap-4'>
-                <Button className='font-black tracking-wider text-pink-500' onClick={() => goToGame("Easy")}>Easy</Button>
-                <Button className='font-black tracking-wider text-pink-500' onClick={() => goToGame("Medium")}>Medium</Button>
-                <Button className='font-black tracking-wider text-pink-500' onClick={() => goToGame("Hard")}>Hard</Button>
+                <Button className='font-black tracking-wider text-white hover:bg-red-500' onClick={() => goToGame("Easy")}>Easy</Button>
+                <Button className='font-black tracking-wider text-white hover:bg-red-500' onClick={() => goToGame("Medium")}>Medium</Button>
+                <Button className='font-black tracking-wider text-white hover:bg-red-500' onClick={() => goToGame("Hard")}>Hard</Button>
             </div>
         </div>
     );

@@ -1,7 +1,7 @@
 import { useState, useEffect } from 'react';
 import { useParams } from "react-router-dom";
 import { Button } from '../components/ui/button';
-import happySnake from '../assets/happy.jpg';
+import happySnake from '../assets/happy.png';
 import sadSnake from '../assets/sad.png';
 
 const generateFood = (snake: { x: number; y: number }[], boardSize: number, foodX: number, foodY: number) => {
