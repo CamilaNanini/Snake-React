@@ -1,4 +1,5 @@
 import { useState, useEffect } from 'react';
+import { useParams } from "react-router-dom";
 import { Button } from '../components/ui/button';
 import happySnake from '../assets/happy.jpg';
 import sadSnake from '../assets/sad.png';
@@ -19,10 +20,21 @@ const generateFood = (snake: { x: number; y: number }[], boardSize: number, food
   return newFood;
 };
 
-const SnakeGame = () => {
-  const BOARD_SIZE = 10; 
-  const INITIAL_SNAKE = [{ x: 5, y: 5 }];
-  const INITIAL_FOOD = generateFood(INITIAL_SNAKE, BOARD_SIZE, 5, 5);
+const SnakeGame: React.FC = () =>  {
+  const { difficulty } = useParams(); 
+  let BOARD_SIZE;
+  if(difficulty === "Easy"){
+    BOARD_SIZE = 8;
+  }
+  else if (difficulty === "Medium"){
+    BOARD_SIZE = 10;
+  }
+  else {
+    BOARD_SIZE = 12;
+  }
+
+  const INITIAL_SNAKE = [{ x: Math.floor(BOARD_SIZE / 2), y: Math.floor(BOARD_SIZE / 2) }];
+  const INITIAL_FOOD = generateFood(INITIAL_SNAKE, BOARD_SIZE, Math.floor(BOARD_SIZE / 2), Math.floor(BOARD_SIZE / 2));
   
   const [snake, setSnake] = useState(INITIAL_SNAKE);
   const [direction, setDirection] = useState('');
@@ -87,7 +99,7 @@ useEffect(() => {
         if (score < 100) {
           setScore(prevScore => {
             const newScore = prevScore + 1;
-            return newScore < 100 ? newScore : 100; // Asegúrate de no pasar de 100
+            return newScore < 100 ? newScore : 100;
           });
         }
         setFood(generateFood(newSnake, BOARD_SIZE, food.x, food.y));
