@@ -6,16 +6,18 @@ import sadSnake from '../assets/sad.png';
 
 const generateFood = (snake: { x: number; y: number }[], boardSize: number, foodX: number, foodY: number) => {
   let newFood: { x: number; y: number };
-  if (snake.some(segment => segment.x === foodX && segment.y === foodY)) {
-    newFood = {
-      x: Math.floor(Math.random() * boardSize),
-      y: Math.floor(Math.random() * boardSize),
-    };
-  } else {
-    newFood = {
-      x: foodX,
-      y: foodY,
-    };
+  newFood = {
+    x: foodX,
+    y: foodY,
+  };
+  const getRandomPosition = () => ({
+    x: Math.floor(Math.random() * boardSize),
+    y: Math.floor(Math.random() * boardSize),
+  });
+
+  // Si la serpiente ya está ahí genero otra posición
+  while (snake.some(segment => segment.x === newFood.x && segment.y === newFood.y)) {
+   newFood = getRandomPosition(); 
   }
   return newFood;
 };
@@ -160,6 +162,7 @@ useEffect(() => {
             const y = Math.floor(idx / BOARD_SIZE);
             const isSnake = snake.some((segment) => segment.x === x && segment.y === y);
             const isFood = food.x === x && food.y === y;
+            const isHead = snake[0].x === x && snake[0].y === y;
   
             return (
               <div
@@ -169,8 +172,57 @@ useEffect(() => {
                   height: 30,
                   backgroundColor: isSnake ? 'green' : isFood ? 'red' : 'white',
                   border: '1px solid black',
+                  position: 'relative', 
                 }}
-              ></div>
+              >
+                {isHead && (
+                  <>
+                    {/* Ojo izquierdo */}
+                    <div
+                      style={{
+                        position: 'absolute',
+                        top: '6px',
+                        left: '6px',
+                        width: '6px',
+                        height: '6px',
+                        backgroundColor: 'white',
+                      }}
+                    ></div>
+                    <div
+                      style={{
+                        position: 'absolute',
+                        top: '7px',
+                        left: '7px',
+                        width: '4px',
+                        height: '4px',
+                        backgroundColor: 'black',
+                      }}
+                    ></div>
+          
+                    {/* Ojo derecho */}
+                    <div
+                      style={{
+                        position: 'absolute',
+                        top: '6px',
+                        right: '6px',
+                        width: '6px',
+                        height: '6px',
+                        backgroundColor: 'white',
+                      }}
+                    ></div>
+                    <div
+                      style={{
+                        position: 'absolute',
+                        top: '7px',
+                        right: '7px',
+                        width: '4px',
+                        height: '4px',
+                        backgroundColor: 'black',
+                      }}
+                    ></div>
+                  </>
+                )}
+              </div>
             );
           })}
         </div>
