@@ -42,7 +42,7 @@ const SnakeGame: React.FC = () =>  {
   const [snake, setSnake] = useState(INITIAL_SNAKE);
   const [direction, setDirection] = useState('');
   const [food, setFood] = useState(INITIAL_FOOD);
-  const [score, setScore] = useState(0);
+  const [score, setScore] = useState(63);
   const [gameOver, setGameOver] = useState(false);
   const [youWin, setYouWin] = useState(false);
 
@@ -136,16 +136,16 @@ useEffect(() => {
 
   return (
     <div>
-      <p className='m-3 text-xl font-black'>Score: {score}</p>
+      <p className='m-3 text-xl font-black bg-white bg-opacity-70 rounded-lg'>Score: {score}</p>
       {gameOver ? (
         <div>
-          <h2 className='m-3 text-xl font-black text-red-800'>Game Over</h2>
+          <h2 className='m-3 text-xl font-black text-red-800 bg-white bg-opacity-70 rounded-lg'>GAME OVER</h2>
           <img src={sadSnake} alt="Icono" className="w-[300px] h-[300px]" />
           <Button variant='default' className='mt-5 font-extrabold' onClick={restartGame}>Restart</Button>
         </div>
       ) : youWin ? (
         <div>
-          <h2 className='m-3 text-xl font-black text-green-700'>YOU WIN!!</h2>
+          <h2 className='m-3 text-xl font-black text-green-800 bg-white bg-opacity-70 rounded-lg'>YOU WIN!!</h2>
           <img src={happySnake} alt="Icono" className="w-[300px] h-[300px]" />
           <Button variant='default' className='mt-5 font-extrabold' onClick={restartGame}>Restart</Button>
         </div>
