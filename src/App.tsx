@@ -13,6 +13,9 @@ function App() {
             <Route path="/game/:difficulty" element={<SnakeGame/>} />
           </Routes>
         </div>
+        <p className="font-black absolute bottom-0 right-0 m-4" style={{ WebkitTextStroke: '1px white' }}>
+          Created by: Camila Nanini
+        </p>
       </div>
     </Router>
   );

@@ -1,5 +1,5 @@
 import { useState, useEffect } from 'react';
-import { useParams } from "react-router-dom";
+import { useNavigate, useParams } from "react-router-dom";
 import { Button } from '../components/ui/button';
 import happySnake from '../assets/happy.png';
 import sadSnake from '../assets/sad.png';
@@ -35,6 +35,7 @@ const SnakeGame: React.FC = () =>  {
     BOARD_SIZE = 12;
   }
 
+  const navigate = useNavigate();
   const INITIAL_SNAKE = [{ x: Math.floor(BOARD_SIZE / 2), y: Math.floor(BOARD_SIZE / 2) }];
   const INITIAL_FOOD = generateFood(INITIAL_SNAKE, BOARD_SIZE, Math.floor(BOARD_SIZE / 2), Math.floor(BOARD_SIZE / 2));
   const FINAL_SCORE = BOARD_SIZE * BOARD_SIZE
@@ -42,7 +43,7 @@ const SnakeGame: React.FC = () =>  {
   const [snake, setSnake] = useState(INITIAL_SNAKE);
   const [direction, setDirection] = useState('');
   const [food, setFood] = useState(INITIAL_FOOD);
-  const [score, setScore] = useState(63);
+  const [score, setScore] = useState(0);
   const [gameOver, setGameOver] = useState(false);
   const [youWin, setYouWin] = useState(false);
 
@@ -136,18 +137,18 @@ useEffect(() => {
 
   return (
     <div>
-      <p className='m-3 text-xl font-black bg-white bg-opacity-70 rounded-lg'>Score: {score}</p>
+      <p className='m-3 text-xl font-black bg-white bg-opacity-80 rounded-lg'>Score: {score}</p>
       {gameOver ? (
         <div>
-          <h2 className='m-3 text-xl font-black text-red-800 bg-white bg-opacity-70 rounded-lg'>GAME OVER</h2>
+          <h2 className='m-3 text-xl font-black text-red-800 bg-white bg-opacity-80 rounded-lg'>GAME OVER</h2>
           <img src={sadSnake} alt="Icono" className="w-[300px] h-[300px]" />
-          <Button variant='default' className='mt-5 font-extrabold' onClick={restartGame}>Restart</Button>
+          <Button variant='default' className='mt-5 font-extrabold bg-opacity-50' onClick={restartGame}>Restart</Button>
         </div>
       ) : youWin ? (
         <div>
-          <h2 className='m-3 text-xl font-black text-green-800 bg-white bg-opacity-70 rounded-lg'>YOU WIN!!</h2>
+          <h2 className='m-3 text-xl font-black text-green-800 bg-white bg-opacity-80 rounded-lg'>YOU WIN!!</h2>
           <img src={happySnake} alt="Icono" className="w-[300px] h-[300px]" />
-          <Button variant='default' className='mt-5 font-extrabold' onClick={restartGame}>Restart</Button>
+          <Button variant='default' className='mt-5 font-extrabold bg-opacity-50' onClick={restartGame}>Restart</Button>
         </div>
       ):(
         <div
@@ -155,6 +156,7 @@ useEffect(() => {
             display: 'grid',
             gridTemplateColumns: `repeat(${BOARD_SIZE}, 30px)`,
             gap: '2px',
+            background: '#33A14A'
           }}
         >
           {Array.from({ length: BOARD_SIZE * BOARD_SIZE }).map((_, idx) => {
@@ -227,6 +229,7 @@ useEffect(() => {
           })}
         </div>
       )}
+      <Button className='mt-4 bg-opacity-50' onClick={()=>navigate(`/`)}>Home</Button>
     </div>
   );
 };
