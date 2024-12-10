@@ -1,5 +1,5 @@
-import SnakeGame from "./game/snake";
-import Home from "./game/home";
+import SnakeGame from "./containers/snake";
+import Home from "./containers/home";
 import { BrowserRouter as Router, Routes, Route } from "react-router-dom";
 
 function App() {
